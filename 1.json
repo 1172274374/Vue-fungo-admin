@@ -1,0 +1,50 @@
+{
+    "ItemList": [
+        {
+            "Header CodeImageName": "https://vrupload.oss-cn-qingdao.aliyuncs.com/xiaoxiongmao.png",
+            "CodeImageId": 12312312,
+            "MusicPath": null,
+            "State": 0,
+            "ImageSourceDataList": [
+                {
+                    "path": "https://vrupload.oss-cn-qingdao.aliyuncs.com/xiaoxiongmao.png",
+                    "ObjId": 12343453,
+                    "Position": [0, 0.5, -11],
+                    "Rotation": [0, 0, 0],
+                    "Scale": [1, 1, 1]
+                }
+            ],
+            "VideoSourceDataList": [
+                {
+                    "HasAlpha": true,
+                    "sensibilidad": 0.5537518,
+                    "Recorte": 0.3376554,
+                    "VColor": {
+                        "r": 0,
+                        "g": 1,
+                        "b": 0,
+                        "a": 1
+                    },
+                    "Path": "https://vrupload.oss-cn-qingdao.aliyuncs.com/23.mp4",
+                    "ObjId": 31123121213,
+                    "Position": [0, 0.5, -5],
+                    "Roation": [0, 0, 0],
+                    "Scale": [1, 1, 1]
+                }
+            ],
+            "ModelSourceDataList": [
+                {
+                    "SourceId": 2006992278,
+                    "ModelName": "xiaoxiongmao",
+                    "Path": null,
+                    "ObjId": 1235435123,
+                    "Position": [0, 0, 3.9],
+                    "Rotation": [0, 0, 0],
+                    "Scale": [1, 1, 1]
+                }
+            ],
+            "FBXSourceDataList": []
+        }
+    ],
+    "PreviewPath": "https://vrupload.oss-cn-qingdao.aliyuncs.com/xiaoxiongmao.png"
+}
