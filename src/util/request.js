@@ -7,8 +7,15 @@ import router from "@/router/index"
 import { msgBox, customizeMsgBox } from "@/util/msgbox"
 import api from "@/api/apis"
 
+// 不同环境不同地址
+const apis = {
+    production: "http://zhupu.zhiying2023.cn/estate/v1", // 线上 (生成环境)
+    development: "http://localhost:9090/estate/v1", // 本地 (开发环境)
+    accessHomeData: "http://www.xmyxapp.com" // 其他api
+}
+
 const axios = Axios.create({
-    baseURL: "http://localhost:9090/estate/v1",
+    baseURL: process.env.NODE_ENV === "production" ? apis.production : apis.development,
     timeout: 1000 * 12
 })
 
@@ -46,8 +53,9 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     // 请求成功
     response => {
-        var token = response.data.token
-        var code = response.data.code
+        console.log(response)
+        const token = response.data.token
+        const code = response.data.code
         if (token !== null && token !== "" && token !== undefined) {
             localStorage.setItem("token", token)
         }
@@ -59,15 +67,6 @@ axios.interceptors.response.use(
             customizeMsgBox(3, response.data.msg)
         }
         return Promise.resolve(response.data)
-    },
-    // 请求失败
-    error => {
-        const { response } = error
-        if (response) {
-            // 请求已发出，但是不在200的范围
-            msgBox(1001)
-            return Promise.reject(response)
-        }
     }
 )
 

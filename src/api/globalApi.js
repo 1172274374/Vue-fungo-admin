@@ -1,11 +1,12 @@
 import request from "../util/request"
 
 // 获取数据列表
-export function requestByGet(api, params) {
+export function requestByGet(api, params, responseType) {
     return request({
         url: api,
         method: "get",
         params: params,
+        responseType: responseType
     })
 }
 
@@ -15,7 +16,7 @@ export function requestByPost(api, formData, params) {
         url: api,
         method: "post",
         data: formData,
-        params: params,
+        params: params
     })
 }
 
@@ -24,7 +25,7 @@ export function requestByPut(api, formData) {
     return request({
         url: api,
         method: "put",
-        data: formData,
+        data: formData
     })
 }
 
@@ -33,6 +34,6 @@ export function requestByDelete(api, ids) {
     return request({
         url: api,
         method: "delete",
-        data: ids,
+        data: ids
     })
 }

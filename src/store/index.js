@@ -8,12 +8,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
-        app,
+        app
     },
     state: {
-        menus: menu,
+        menus: menu
     },
     mutations: {},
     actions: {},
-    getters,
+    getters
 })

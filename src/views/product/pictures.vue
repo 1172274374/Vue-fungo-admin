@@ -10,11 +10,15 @@
             </div>
         </div>
         <div class="timebar">
-            <div class="lastTime"><el-button style="margin-top: 12px" @click="lasttime">上一时段</el-button></div>
+            <div class="lastTime">
+                <el-button style="margin-top: 12px" @click="lasttime">上一时段</el-button>
+            </div>
             <el-steps :active="stepActive" align-center finish-status="success" class="bar">
                 <el-step :title="item" description="" v-for="(item, index) in dataName" :key="index"></el-step>
             </el-steps>
-            <div class="nextTime"><el-button style="margin-top: 12px" @click="nexttime">下一时段</el-button></div>
+            <div class="nextTime">
+                <el-button style="margin-top: 12px" @click="nexttime">下一时段</el-button>
+            </div>
         </div>
     </div>
 </template>
@@ -25,6 +29,7 @@ import util from "@/util/index"
 import { requestByGet, requestByPost, requestByPut, requestByDelete } from "@/api/globalApi"
 import api from "@/api/apis"
 import { customizeMsgBox, msgBox } from "@/util/msgbox"
+
 export default {
     data() {
         return {
@@ -39,7 +44,7 @@ export default {
             stepActive: 1,
             heatData: [],
             heat: null,
-            dataName: [],
+            dataName: []
         }
     },
     mounted() {
@@ -56,32 +61,32 @@ export default {
                 0.2: "#9da6ea",
                 0.4: "#6be774",
                 0.6: "#d5fbd7",
-                0.9: "#ef2c0f",
+                0.9: "#ef2c0f"
             },
-            radius: 120, // 最大辐射半径
+            radius: 120 // 最大辐射半径
         }).addTo(this.map)
 
         let dataTime = util.formatDate(new Date(), "yyyy-MM-dd-HH-00-00")
         let reqdata = {
-            time: dataTime,
+            time: dataTime
         }
 
         requestByGet(api.heatTime, reqdata)
-            .then((value) => {
+            .then(value => {
                 if (value.code === 500) {
                     customizeMsgBox(4, "数据还未生成")
                 }
 
                 this.heatData = value.rspdata.data
 
-                this.dataName = value.rspdata.data.map((data) => {
+                this.dataName = value.rspdata.data.map(data => {
                     return data.time
                 })
-                
+
                 this.heat.setData(this.heatData[this.stepActive - 1].points) //设置数据
                 console.log("initialize map succeed.")
             })
-            .catch((error) => {
+            .catch(error => {
                 msgBox(1000)
             })
     },
@@ -91,7 +96,7 @@ export default {
                 center: center, //设置地图中心点坐标
                 zoom: zoom, //设置地图缩放级别
                 pitch: 0, //设置俯仰角
-                rotation: 0, //设置地图旋转角度
+                rotation: 0 //设置地图旋转角度
             })
         },
         changeTime() {
@@ -104,24 +109,24 @@ export default {
             }
 
             let reqdata = {
-                time: dataTime,
+                time: dataTime
             }
 
             requestByGet(api.heatTime, reqdata)
-                .then((value) => {
+                .then(value => {
                     if (value.code === 500) {
                         customizeMsgBox(4, "数据还未生成")
                     }
 
                     this.heatData = value.rspdata.data
 
-                    this.dataName = value.rspdata.data.map((data) => {
+                    this.dataName = value.rspdata.data.map(data => {
                         return data.time
                     })
 
                     this.heat.setData(this.heatData[this.stepActive - 1].points) //设置数据
                 })
-                .catch((error) => {
+                .catch(error => {
                     msgBox(1000)
                 })
         },
@@ -134,8 +139,8 @@ export default {
             if (this.stepActive === 3) return
             this.stepActive = this.stepActive + 1
             this.heat.setData(this.heatData[this.stepActive - 1].points) //设置数据
-        },
-    },
+        }
+    }
 }
 </script>
 
@@ -161,6 +166,7 @@ export default {
         padding: 25px;
     }
 }
+
 .timebar {
     width: 100%;
     margin-top: 4vh;
@@ -172,6 +178,7 @@ export default {
         margin-top: 2vh;
         width: 70%;
     }
+
     .lastTime {
         width: 10%;
         display: flex;

@@ -1,12 +1,26 @@
 // 工具api
 module.exports = {
-    Product: "/Product", //软件
+    branch: "/branch", //软件
+
+    excel: "/excel",
+
     manager: "/manager", //管理者
+
+    house: "/house",
+
     feedback: "/feedback",
+
+    allBranch: "/allBranch",
+
+    peopleList: "/peopleList", //族谱人数
 
     engineering: "/engineering", //工程模板
 
     productList: "/productList", //软件列表
+
+    branchList: "/branchList", //支系列表
+
+    houseList: "/houseList",
 
     userList: "/userList", // 用户列表
 
@@ -40,5 +54,5 @@ module.exports = {
 
     floor: "/floor",
 
-    auditProcess: "/auditProcess",
+    auditProcess: "/auditProcess"
 }

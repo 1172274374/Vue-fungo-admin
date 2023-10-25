@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="login">
-            <h1 style="color: #fff">解放碑</h1>
+            <h1 style="color: #fff">智赢族谱</h1>
             <form action="">
                 <input type="text" placeholder="账号" v-model="loginForm.iphone" />
                 <input type="password" placeholder="密码" v-model="loginForm.password" />
@@ -49,14 +49,11 @@ export default {
         handleLogin() {
             requestByGet(api.managerLogin, this.loginForm)
                 .then(value => {
-                    console.log(value)
-                    if (value.code === 200) {
+                    if (value.code == 200) {
                         this.loading = true
                         this.$router.push("/dashboard")
 
                         this.$store.dispatch("setMenus", value.rspdata.managePermission)
-
-                        console.log(this.$store)
 
                         localStorage.setItem("jwt", value.jwt)
 

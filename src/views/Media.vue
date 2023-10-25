@@ -89,38 +89,39 @@
 import Bytes from "bytes"
 import { getFileMenu, getFile } from "@/api/file"
 import VuePerfectScrollbar from "vue-perfect-scrollbar"
+
 export default {
     components: {
-        VuePerfectScrollbar,
+        VuePerfectScrollbar
     },
     props: {
         type: {
             type: String,
-            default: "image",
-        },
+            default: "image"
+        }
     },
     data: () => ({
         size: "lg",
         view: "grid",
         selectedFile: {
-            path: "/static/icon/empty_file.svg",
+            path: "/static/icon/empty_file.svg"
         },
         imageMime: ["image/jpeg", "image/png", "image/svg+xml"],
 
         folders: [
             {
                 name: "bg",
-                lastModified: "2018-03-03",
+                lastModified: "2018-03-03"
             },
             {
                 name: "cards",
-                lastModified: "2018-03-03",
+                lastModified: "2018-03-03"
             },
             {
                 name: "avatar",
-                lastModified: "2018-03-03",
-            },
-        ],
+                lastModified: "2018-03-03"
+            }
+        ]
     }),
     computed: {
         mediaMenu() {
@@ -128,7 +129,7 @@ export default {
         },
         files() {
             return getFile()
-        },
+        }
     },
 
     methods: {
@@ -149,19 +150,19 @@ export default {
         },
         computeFileImage(file) {
             return this.isImage(file) ? file.path : "/static/icon/file_empty.svg"
-        },
-    },
+        }
+    }
 }
 </script>
 <style lang="stylus" scoped>
 .media
   &-cotent--wrap
-
   &-menu
     min-width: 260px
     border-right: 1px solid #eee
     min-height: calc(100vh - 50px - 64px);
+
   &-detail
-    min-width:300px
-    border-left:1px solid #eee
+    min-width: 300px
+    border-left: 1px solid #eee
 </style>

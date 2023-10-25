@@ -5,9 +5,9 @@
             添加角色
         </el-button>
         <!-- <el-button @click="handleMultiDelete">
-          <i class="el-icon-delete" />
-          全部删除
-        </el-button> -->
+  <i class="el-icon-delete" />
+  全部删除
+</el-button> -->
         <el-table
             v-loading="dataLoading"
             style="margin-top: 10px"
@@ -86,8 +86,8 @@
                     <el-button
                         type="primary"
                         @click="updateFlag == false ? handleAdd(dataForm) : handleUpdate(dataForm)"
-                        >提 交</el-button
-                    >
+                        >提 交
+                    </el-button>
                 </div>
             </el-dialog>
         </template>
@@ -111,8 +111,10 @@ import { msgBox, customizeMsgBox } from "@/util/msgbox"
 import { requestByGet, requestByPost, requestByPut, requestByDelete } from "@/api/globalApi"
 import api from "@/api/apis"
 
+import { Projects } from "@/api/project"
+
 export default {
-    name: "orderProduct",
+    name: "OrderProduct",
     components: {},
     // eslint-disable-next-line vue/require-prop-types
     props: ["superiorId"],
@@ -136,79 +138,20 @@ export default {
             dialogTitle: "", // dialog标题
             updateFlag: false, // 是否是更新操作，否则新增
             dataForm: {
-                roleName: "",
+                roleName: ""
             }, // dialog 表单数据
             rules: {
-                roleName: [{ validator: validatePass, trigger: "blur" }],
+                roleName: [{ validator: validatePass, trigger: "blur" }]
             },
             fileList: [],
-            roleData: [
-                {
-                    id: 301,
-                    label: "管理员",
-                    children: [
-                        {
-                            id: 302,
-                            label: "管理员管理",
-                        },
-                        {
-                            id: 303,
-                            label: "权限管理",
-                        },
-                        {
-                            id: 304,
-                            label: "审核",
-                        },
-                    ],
-                },
-                {
-                    id: 401,
-                    label: "用户管理",
-                    children: [
-                        {
-                            id: 402,
-                            label: "用户列表",
-                        },
-                    ],
-                },
-                {
-                    id: 201,
-                    label: "产品管理",
-                    children: [
-                        {
-                            id: 202,
-                            label: "客服",
-                        },
-                        {
-                            id: 203,
-                            label: "用户反馈",
-                        },
-                        {
-                            id: 204,
-                            label: "工程模板",
-                        },
-                        {
-                            id: 205,
-                            label: "热力图",
-                        },
-                        {
-                            id: 206,
-                            label: "模型",
-                        },
-                        {
-                            id: 207,
-                            label: "版本管理",
-                        },
-                    ],
-                },
-            ],
+            roleData: Projects,
             defaultProps: {
                 children: "children",
-                label: "label",
+                label: "label"
             },
             permisionShow: false,
             watchRoleName: "超级管理员",
-            watchPermissionData: [],
+            watchPermissionData: []
         }
     },
     created() {
@@ -220,7 +163,7 @@ export default {
         fetchData() {
             this.dataLoading = true
             requestByGet(api.roleList, this.params)
-                .then((value) => {
+                .then(value => {
                     this.dataLoading = false
 
                     console.log(value)
@@ -234,7 +177,7 @@ export default {
                         localStorage.removeItem("jwt")
                     }
                 })
-                .catch((error) => {
+                .catch(error => {
                     msgBox(1000)
                     this.dataLoading = true
                 })
@@ -246,19 +189,22 @@ export default {
         },
         // 添加数据
         handleAdd(formdata) {
-            let permissionCode = this.$refs.tree.getHalfCheckedKeys().concat(this.$refs.tree.getCheckedKeys()).join(",")
+            let permissionCode = this.$refs.tree
+                .getHalfCheckedKeys()
+                .concat(this.$refs.tree.getCheckedKeys())
+                .join(",")
 
-            this.$refs.oneForm.validate((valid) => {
+            this.$refs.oneForm.validate(valid => {
                 if (valid) {
                     if (permissionCode == "") {
                         customizeMsgBox(4000, "请添加权限")
                     } else {
                         let reqdata = {
                             permissionNo: permissionCode,
-                            roleName: formdata.roleName,
+                            roleName: formdata.roleName
                         }
 
-                        requestByPost(api.role, reqdata).then((value) => {
+                        requestByPost(api.role, reqdata).then(value => {
                             console.log(value)
                             if (value.code === 200) {
                                 this.dialogFormVisible = false
@@ -277,9 +223,9 @@ export default {
         },
         // 更新数据
         handleUpdate(formdata) {
-            this.$refs.oneForm.validate((valid) => {
+            this.$refs.oneForm.validate(valid => {
                 if (valid) {
-                    requestByPut(api.orderProduct, JSON.stringify(formdata)).then((value) => {
+                    requestByPut(api.orderProduct, JSON.stringify(formdata)).then(value => {
                         if (value.code === 2000) {
                             this.dialogFormVisible = false
                             this.fetchData()
@@ -302,9 +248,9 @@ export default {
                 if (idArr.c.length > 0) {
                     this.$confirm("确认删除", "全部删除", {
                         confirmButtonText: "确认",
-                        cancelButtonText: "取消",
+                        cancelButtonText: "取消"
                     }).then(() => {
-                        requestByDelete(api.orderProduct, JSON.stringify(idArr)).then((value) => {
+                        requestByDelete(api.orderProduct, JSON.stringify(idArr)).then(value => {
                             if (value.code === 2000) {
                                 this.fetchData()
                             }
@@ -322,7 +268,7 @@ export default {
                 this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
                     confirmButtonText: "确定",
                     cancelButtonText: "取消",
-                    type: "warning",
+                    type: "warning"
                 })
                     .then(() => {
                         console.log(index, row)
@@ -331,7 +277,7 @@ export default {
 
                         idArr.ids.push(row.roleId)
 
-                        requestByDelete(api.role, JSON.stringify(idArr)).then((value) => {
+                        requestByDelete(api.role, JSON.stringify(idArr)).then(value => {
                             if (value.code === 200) {
                                 customizeMsgBox(1, "删除成功")
                                 this.fetchData()
@@ -348,7 +294,7 @@ export default {
             this.permisionShow = true
             this.$forceUpdate()
             this.watchRoleName = row.roleName
-            this.watchPermissionData = row.permissionNo.split(",").filter((item) => {
+            this.watchPermissionData = row.permissionNo.split(",").filter(item => {
                 if (!["201", "301", "401"].includes(item)) {
                     return item
                 }
@@ -407,7 +353,7 @@ export default {
                 lock: true,
                 text: "正在上传请勿关闭",
                 spinner: "el-icon-loading",
-                background: "rgba(0, 0, 0, 0.7)",
+                background: "rgba(0, 0, 0, 0.7)"
             })
 
             if (file.response != undefined && file.status == "success") {
@@ -430,8 +376,8 @@ export default {
             }
 
             console.log(file, file.response)
-        },
-    },
+        }
+    }
 }
 </script>
 

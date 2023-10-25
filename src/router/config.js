@@ -67,7 +67,7 @@ export const protectedRoute = [
                 path: "/cms/table",
                 name: "ListTable",
                 meta: { title: "CMS Table" },
-                component: () => import(/* webpackChunkName: "table" */ "@/views/list/Table.vue")
+                component: () => import(/* webpackChunkName: "table" */ "@views/list/Archive.vue")
             }
         ]
     },
@@ -116,13 +116,13 @@ export const protectedRoute = [
             //   path: "/widgets1/permissions",
             //   name: "Permissions",
             //   meta: { title: "用户权限" },
-            //   component: () => import(/* webpackChunkName: "table" */ "@/views/list/Permissions.vue"),
+            //   component: () => import(/* webpackChunkName: "table" */ "@/views/list/Branch.vue"),
             // },
             // {
             //   path: "/widgets1/role",
             //   name: "Role",
             //   meta: { title: "角色管理" },
-            //   component: () => import(/* webpackChunkName: "table" */ "@/views/list/Role.vue"),
+            //   component: () => import(/* webpackChunkName: "table" */ "@/views/list/Housing.vue"),
             // },
             {
                 path: "/widgets1/User",
@@ -234,6 +234,32 @@ export const protectedRoute = [
                 name: "audit",
                 meta: { title: "审核" },
                 component: () => import(/* webpackChunkName: "table" */ "@/views/manager/audit.vue")
+            }
+        ]
+    },
+
+    {
+        path: "/widgets5",
+        component: DefaultLayout,
+        meta: { title: "族谱", icon: "widgets", group: "advance5" },
+        children: [
+            {
+                path: "/widgets5/Branch",
+                name: "clade",
+                meta: { title: "支系管理" },
+                component: () => import(/* webpackChunkName: "table" */ "@/views/list/Branch.vue")
+            },
+            {
+                path: "/widgets5/Housing",
+                name: "house",
+                meta: { title: "房系管理" },
+                component: () => import(/* webpackChunkName: "table" */ "@/views/list/Housing.vue")
+            },
+            {
+                path: "/widgets5/Archive",
+                name: "archives",
+                meta: { title: "族谱档案管理" },
+                component: () => import(/* webpackChunkName: "table" */ "@/views/list/Archive.vue")
             }
         ]
     },

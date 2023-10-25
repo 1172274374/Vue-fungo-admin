@@ -5,9 +5,9 @@
             添加
         </el-button>
         <!-- <el-button @click="handleMultiDelete">
-        <i class="el-icon-delete" />
-        全部删除
-      </el-button> -->
+    <i class="el-icon-delete" />
+    全部删除
+  </el-button> -->
         <el-table
             v-loading="dataLoading"
             style="margin-top: 10px"
@@ -111,8 +111,8 @@
                     <el-button
                         type="primary"
                         @click="updateFlag == false ? handleAdd(dataForm) : handleUpdate(dataForm)"
-                        >提 交</el-button
-                    >
+                        >提 交
+                    </el-button>
                 </div>
             </el-dialog>
         </template>
@@ -125,7 +125,7 @@ import { requestByGet, requestByPost, requestByPut, requestByDelete } from "@/ap
 import api from "@/api/apis"
 
 export default {
-    name: "orderProduct",
+    name: "OrderProduct",
     components: {},
     // eslint-disable-next-line vue/require-prop-types
     props: ["superiorId"],
@@ -173,16 +173,16 @@ export default {
                 manageIphone: "",
                 managePassword: "",
                 manageRole: "",
-                manageName: "",
+                manageName: ""
             }, // dialog 表单数据
             rules: {
                 manageIphone: [{ validator: validatePass, trigger: "blur" }],
                 managePassword: [{ validator: validatePass2, trigger: "blur" }],
                 manageRole: [{ validator: validatePass3, trigger: "blur" }],
-                manageName: [{ validator: validatePass4, trigger: "blur" }],
+                manageName: [{ validator: validatePass4, trigger: "blur" }]
             },
             fileList: [],
-            roleListData: [],
+            roleListData: []
         }
     },
     created() {
@@ -194,7 +194,7 @@ export default {
         fetchData() {
             this.dataLoading = true
             requestByGet(api.managerList, this.params)
-                .then((value) => {
+                .then(value => {
                     this.dataLoading = false
 
                     console.log(value)
@@ -208,22 +208,22 @@ export default {
                         localStorage.removeItem("jwt")
                     }
                 })
-                .catch((error) => {
+                .catch(error => {
                     msgBox(1000)
                     this.dataLoading = true
                 })
 
             let reqdata = {
-                isAll: true,
+                isAll: true
             }
             requestByGet(api.roleList, reqdata)
-                .then((value) => {
+                .then(value => {
                     console.log(value)
                     if (value.rspdata !== "") {
                         this.roleListData = value.rspdata
                     }
                 })
-                .catch((error) => {
+                .catch(error => {
                     msgBox(1000)
                     this.dataLoading = true
                 })
@@ -235,15 +235,15 @@ export default {
         },
         // 添加数据
         handleAdd(formdata) {
-            this.$refs.oneForm.validate((valid) => {
+            this.$refs.oneForm.validate(valid => {
                 if (valid) {
-                    let findRolePermission = this.roleListData.find((item) => {
+                    let findRolePermission = this.roleListData.find(item => {
                         return item.roleName == formdata.manageRole
                     })
 
                     formdata.managePermission = findRolePermission.rolePermission
 
-                    requestByPost(api.manager, JSON.stringify(formdata)).then((value) => {
+                    requestByPost(api.manager, JSON.stringify(formdata)).then(value => {
                         console.log(value)
                         if (value.code === 200) {
                             this.dialogFormVisible = false
@@ -261,9 +261,9 @@ export default {
         },
         // 更新数据
         handleUpdate(formdata) {
-            this.$refs.oneForm.validate((valid) => {
+            this.$refs.oneForm.validate(valid => {
                 if (valid) {
-                    requestByPut(api.orderProduct, JSON.stringify(formdata)).then((value) => {
+                    requestByPut(api.orderProduct, JSON.stringify(formdata)).then(value => {
                         if (value.code === 2000) {
                             this.dialogFormVisible = false
                             this.fetchData()
@@ -286,9 +286,9 @@ export default {
                 if (idArr.c.length > 0) {
                     this.$confirm("确认删除", "全部删除", {
                         confirmButtonText: "确认",
-                        cancelButtonText: "取消",
+                        cancelButtonText: "取消"
                     }).then(() => {
-                        requestByDelete(api.orderProduct, JSON.stringify(idArr)).then((value) => {
+                        requestByDelete(api.orderProduct, JSON.stringify(idArr)).then(value => {
                             if (value.code === 2000) {
                                 this.fetchData()
                             }
@@ -306,7 +306,7 @@ export default {
                 this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
                     confirmButtonText: "确定",
                     cancelButtonText: "取消",
-                    type: "warning",
+                    type: "warning"
                 })
                     .then(() => {
                         console.log(index, row)
@@ -315,7 +315,7 @@ export default {
 
                         idArr.ids.push(row.manageId)
 
-                        requestByDelete(api.manager, JSON.stringify(idArr)).then((value) => {
+                        requestByDelete(api.manager, JSON.stringify(idArr)).then(value => {
                             if (value.code === 200) {
                                 customizeMsgBox(1, "删除成功")
                                 this.fetchData()
@@ -377,7 +377,7 @@ export default {
                 lock: true,
                 text: "正在上传请勿关闭",
                 spinner: "el-icon-loading",
-                background: "rgba(0, 0, 0, 0.7)",
+                background: "rgba(0, 0, 0, 0.7)"
             })
 
             if (file.response != undefined && file.status == "success") {
@@ -400,8 +400,8 @@ export default {
             }
 
             console.log(file, file.response)
-        },
-    },
+        }
+    }
 }
 </script>
 

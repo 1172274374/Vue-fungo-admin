@@ -3,7 +3,7 @@
         <v-toolbar color="primary darken-1" dark>
             <img src="../img/logo.png" height="36" alt="Vue Material Admin Template" />
             <v-toolbar-title class="ml-0 pl-3">
-                <span class="hidden-sm-and-down">重庆解放碑</span>
+                <span class="hidden-sm-and-down">智赢族谱</span>
             </v-toolbar-title>
         </v-toolbar>
         <vue-perfect-scrollbar class="drawer-menu--scroll" :settings="scrollSettings">

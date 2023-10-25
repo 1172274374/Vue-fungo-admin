@@ -5,9 +5,9 @@
             添加
         </el-button>
         <!-- <el-button @click="handleMultiDelete">
-          <i class="el-icon-delete" />
-          全部删除
-        </el-button> -->
+      <i class="el-icon-delete" />
+      全部删除
+    </el-button> -->
         <el-table
             v-loading="dataLoading"
             style="margin-top: 10px"
@@ -59,16 +59,16 @@
                 </template>
             </el-table-column>
             <!-- <el-table-column label="操作" align="center" width="100">
-          <template slot-scope="scope">
-            <el-button type="success" size="mini" icon="el-icon-setting" circle @click="updateClick(scope.row, '更新')" />
-            <el-button
-              type="danger"
-              size="mini"    
-              circle
-              @click="handleDelete(scope.$index, scope.row)"
-            />
-          </template>
-        </el-table-column> -->
+    <template slot-scope="scope">
+      <el-button type="success" size="mini" icon="el-icon-setting" circle @click="updateClick(scope.row, '更新')" />
+      <el-button
+        type="danger"
+        size="mini"     
+        circle
+        @click="handleDelete(scope.$index, scope.row)"
+      />
+    </template>
+  </el-table-column> -->
         </el-table>
         <div style="margin-top: 30px; float: right">
             <el-pagination
@@ -153,8 +153,8 @@
                     <el-button
                         type="primary"
                         @click="updateFlag == false ? handleAdd(dataForm) : handleUpdate(dataForm)"
-                        >提 交</el-button
-                    >
+                        >提 交
+                    </el-button>
                 </div>
             </el-dialog>
         </template>
@@ -168,7 +168,7 @@ import api from "@/api/apis"
 import OSS from "ali-oss"
 
 export default {
-    name: "orderProduct",
+    name: "OrderProduct",
     components: {},
     // eslint-disable-next-line vue/require-prop-types
     props: ["superiorId"],
@@ -232,7 +232,7 @@ export default {
                 floorPic: "",
                 floorClass: "",
                 floorIphone: "",
-                floorTower: "",
+                floorTower: ""
             }, // dialog 表单数据
             rules: {
                 floorName: [{ validator: validatePass, trigger: "blur" }],
@@ -240,32 +240,32 @@ export default {
                 floorPic: [{ validator: validatePass3, trigger: "blur" }],
                 floorClass: [{ validator: validatePass4, trigger: "blur" }],
                 floorIphone: [{ validator: validatePass5, trigger: "blur" }],
-                floorTower: [{ validator: validatePass6, trigger: "blur" }],
+                floorTower: [{ validator: validatePass6, trigger: "blur" }]
             },
             fileList: [],
             fileList1: [],
             options: [
                 {
                     label: "便利店",
-                    value: "便利店",
+                    value: "便利店"
                 },
                 {
                     label: "超市",
-                    value: "超市",
+                    value: "超市"
                 },
                 {
                     label: "百货店",
-                    value: "百货店",
+                    value: "百货店"
                 },
                 {
                     label: "专业店",
-                    value: "专业店",
+                    value: "专业店"
                 },
                 {
                     label: "体验店",
-                    value: "体验店",
-                },
-            ],
+                    value: "体验店"
+                }
+            ]
         }
     },
     created() {
@@ -276,13 +276,13 @@ export default {
         fetchData() {
             this.dataLoading = true
             requestByGet(api.floorList, this.params)
-                .then((value) => {
+                .then(value => {
                     this.dataLoading = false
 
                     if (value.rspdata !== "" && value.rspdata !== null) {
                         console.log(value.rspdata.records)
 
-                        this.dataList = value.rspdata.records.filter((item) => {
+                        this.dataList = value.rspdata.records.filter(item => {
                             return item.floorAuditProcess == 2
                         })
 
@@ -293,7 +293,7 @@ export default {
                         localStorage.removeItem("jwt")
                     }
                 })
-                .catch((error) => {
+                .catch(error => {
                     msgBox(1000)
                     this.dataLoading = true
                 })
@@ -305,11 +305,11 @@ export default {
         },
         // 添加数据
         handleAdd(formdata) {
-            this.$refs.oneForm.validate((valid) => {
+            this.$refs.oneForm.validate(valid => {
                 formdata.floorManager = localStorage.getItem("userName")
 
                 if (valid) {
-                    requestByPost(api.floor, formdata).then((value) => {
+                    requestByPost(api.floor, formdata).then(value => {
                         if (value.code === 200) {
                             this.dialogFormVisible = false
                             this.fetchData()
@@ -326,20 +326,20 @@ export default {
         },
         // 更新数据
         handleUpdate(formdata) {
-            this.$refs.oneForm.validate((valid) => {
+            this.$refs.oneForm.validate(valid => {
                 let reqdata = {
                     templateDesc: formdata.desc,
                     templateJson: formdata.model,
                     templateName: formdata.name,
                     templatePreview: formdata.preview,
                     templateVersion: formdata.version.join(","),
-                    templateId: formdata.id,
+                    templateId: formdata.id
                 }
 
                 console.log(reqdata)
 
                 if (valid) {
-                    requestByPut(api.template, JSON.stringify(reqdata)).then((value) => {
+                    requestByPut(api.template, JSON.stringify(reqdata)).then(value => {
                         console.log(value)
 
                         if (value.code === 200) {
@@ -365,9 +365,9 @@ export default {
                 if (idArr.c.length > 0) {
                     this.$confirm("确认删除", "全部删除", {
                         confirmButtonText: "确认",
-                        cancelButtonText: "取消",
+                        cancelButtonText: "取消"
                     }).then(() => {
-                        requestByDelete(api.template, JSON.stringify(idArr)).then((value) => {
+                        requestByDelete(api.template, JSON.stringify(idArr)).then(value => {
                             if (value.code === 2000) {
                                 this.fetchData()
                             }
@@ -380,7 +380,7 @@ export default {
             this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
-                type: "warning",
+                type: "warning"
             })
                 .then(() => {
                     console.log(index, row)
@@ -389,7 +389,7 @@ export default {
 
                     idArr.ids.push(row.templateId)
 
-                    requestByDelete(api.template, JSON.stringify(idArr)).then((value) => {
+                    requestByDelete(api.template, JSON.stringify(idArr)).then(value => {
                         if (value.code === 200) {
                             customizeMsgBox(1, "删除成功")
                             this.fetchData()
@@ -416,7 +416,7 @@ export default {
                 model: val.templateJson,
                 preview: val.templatePreview,
                 version: val.templateVersion.split(","),
-                id: val.templateId,
+                id: val.templateId
             }
 
             this.dialogTitle = title
@@ -462,14 +462,14 @@ export default {
                 lock: true,
                 text: "正在上传请勿关闭",
                 spinner: "el-icon-loading",
-                background: "rgba(0, 0, 0, 0.7)",
+                background: "rgba(0, 0, 0, 0.7)"
             })
 
             var client = new OSS({
                 region: "oss-cn-qingdao", //阿里云获取
                 accessKeyId: "LTAI5t7QeaVRqWBiZ11KukvM",
                 accessKeySecret: "dagZEVmFWoaHxilPvapIzlijY2dVeJ",
-                bucket: "vrupload", //要存储的目录名
+                bucket: "vrupload" //要存储的目录名
             })
 
             var val = document.getElementById("fileName").value
@@ -484,7 +484,7 @@ export default {
             var storeAs = obj + suffix
             client
                 .multipartUpload(storeAs, file)
-                .then(function (result) {
+                .then(function(result) {
                     loading.close()
 
                     switch (result.res.statusCode) {
@@ -513,7 +513,7 @@ export default {
                     that.$forceUpdate()
                     console.log(that.dataForm.model)
                 })
-                .catch(function (err) {
+                .catch(function(err) {
                     loading.close()
                     customizeMsgBox(4, "上传失败")
                     console.log(err)
@@ -533,14 +533,14 @@ export default {
                 lock: true,
                 text: "正在上传请勿关闭",
                 spinner: "el-icon-loading",
-                background: "rgba(0, 0, 0, 0.7)",
+                background: "rgba(0, 0, 0, 0.7)"
             })
 
             var client = new OSS({
                 region: "oss-cn-qingdao", //阿里云获取
                 accessKeyId: "LTAI5t7QeaVRqWBiZ11KukvM",
                 accessKeySecret: "dagZEVmFWoaHxilPvapIzlijY2dVeJ",
-                bucket: "vrupload", //要存储的目录名
+                bucket: "vrupload" //要存储的目录名
             })
 
             var val = document.getElementById("fileName1").value
@@ -551,7 +551,7 @@ export default {
             var storeAs = obj + suffix
             client
                 .multipartUpload(storeAs, file)
-                .then(function (result) {
+                .then(function(result) {
                     loading.close()
 
                     switch (result.res.statusCode) {
@@ -582,7 +582,7 @@ export default {
                     that.$forceUpdate()
                     console.log(that.dataForm.floorPic)
                 })
-                .catch(function (err) {
+                .catch(function(err) {
                     loading.close()
                     customizeMsgBox(4, "上传失败")
                     console.log(err)
@@ -601,14 +601,14 @@ export default {
                 lock: true,
                 text: "正在上传请勿关闭",
                 spinner: "el-icon-loading",
-                background: "rgba(0, 0, 0, 0.7)",
+                background: "rgba(0, 0, 0, 0.7)"
             })
 
             var client = new OSS({
                 region: "oss-cn-qingdao", //阿里云获取
                 accessKeyId: "LTAI5t7QeaVRqWBiZ11KukvM",
                 accessKeySecret: "dagZEVmFWoaHxilPvapIzlijY2dVeJ",
-                bucket: "vrupload", //要存储的目录名
+                bucket: "vrupload" //要存储的目录名
             })
 
             var val = document.getElementById("fileName2").value
@@ -619,7 +619,7 @@ export default {
             var storeAs = obj + suffix
             client
                 .multipartUpload(storeAs, file)
-                .then(function (result) {
+                .then(function(result) {
                     loading.close()
 
                     switch (result.res.statusCode) {
@@ -650,7 +650,7 @@ export default {
                     that.$forceUpdate()
                     console.log(that.dataForm.Abmodel)
                 })
-                .catch(function (err) {
+                .catch(function(err) {
                     loading.close()
                     customizeMsgBox(4, "上传失败")
                     console.log(err)
@@ -672,8 +672,8 @@ export default {
 
         switchChange(callback) {
             this.dataForm.status = callback == true ? 1 : 0
-        },
-    },
+        }
+    }
 }
 </script>
 
@@ -705,6 +705,7 @@ export default {
             font-size: 10px;
         }
     }
+
     .clear {
         width: 60px;
         height: 30px;

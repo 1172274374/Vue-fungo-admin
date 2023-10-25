@@ -1,13 +1,13 @@
 <template>
     <div class="app-container">
         <!-- <el-button @click="addClick('添加')">
-      <i class="el-icon-plus" />
-      添加
-    </el-button>
-    <el-button @click="handleMultiDelete">
-      <i class="el-icon-delete" />
-      全部删除
-    </el-button> -->
+  <i class="el-icon-plus" />
+  添加
+</el-button>
+<el-button @click="handleMultiDelete">
+  <i class="el-icon-delete" />
+  全部删除
+</el-button> -->
         <div style="margin-top: 15px; width: 300px">
             <el-input placeholder="请输入用户id" v-model="params.userId" class="input-with-select" @blur="searchuser">
                 <el-button slot="append" icon="el-icon-search" @click="searchuser"></el-button>
@@ -121,14 +121,14 @@
                         <span>{{ dataForm.createTime }}</span>
                     </el-form-item>
                     <el-form-item label="封禁:" prop="delivery">
-                        <el-switch v-model="switchValue" active-color="red" @change="switchChange"> </el-switch>
+                        <el-switch v-model="switchValue" active-color="red" @change="switchChange"></el-switch>
                     </el-form-item>
                 </el-form>
                 <div slot="footer" style="text-align: center" class="dialog-footer">
                     <el-button @click="dialogFormVisible = false">关闭</el-button>
                     <!-- <el-button type="primary" @click="updateFlag == false ? handleAdd(dataForm) : handleUpdate(dataForm)"
-            >提 交</el-button
-          > -->
+  >提 交</el-button
+> -->
                 </div>
             </el-dialog>
         </template>
@@ -141,7 +141,7 @@ import { requestByGet, requestByPost, requestByPut, requestByDelete } from "@/ap
 import api from "@/api/apis"
 
 export default {
-    name: "orderProduct",
+    name: "OrderProduct",
     components: {},
     // eslint-disable-next-line vue/require-prop-types
     props: ["superiorId"],
@@ -158,7 +158,7 @@ export default {
             updateFlag: false, // 是否是更新操作，否则新增
             dataForm: {}, // dialog 表单数据
             rules: {}, // 表单验证
-            switchValue: false,
+            switchValue: false
         }
     },
     created() {
@@ -169,7 +169,7 @@ export default {
         fetchData() {
             this.dataLoading = true
             requestByGet(api.userList, this.params)
-                .then((value) => {
+                .then(value => {
                     console.log(value)
                     this.dataLoading = false
                     if (value.code == 200) {
@@ -181,7 +181,7 @@ export default {
                         localStorage.removeItem("jwt")
                     }
                 })
-                .catch((error) => {
+                .catch(error => {
                     msgBox(1000)
                     this.dataLoading = true
                 })
@@ -193,10 +193,10 @@ export default {
         },
         // 添加数据
         handleAdd(formdata) {
-            this.$refs.oneForm.validate((valid) => {
+            this.$refs.oneForm.validate(valid => {
                 if (valid) {
                     formdata.orderId = this.superiorId
-                    requestByPost(api.orderProduct, JSON.stringify(formdata)).then((v) => {
+                    requestByPost(api.orderProduct, JSON.stringify(formdata)).then(v => {
                         if (v.code === 2000) {
                             this.dialogFormVisible = false
                             this.fetchData()
@@ -211,9 +211,9 @@ export default {
         },
         // 更新数据
         handleUpdate(formdata) {
-            this.$refs.oneForm.validate((valid) => {
+            this.$refs.oneForm.validate(valid => {
                 if (valid) {
-                    requestByPut(api.orderProduct, JSON.stringify(formdata)).then((value) => {
+                    requestByPut(api.orderProduct, JSON.stringify(formdata)).then(value => {
                         if (value.code === 2000) {
                             this.dialogFormVisible = false
                             this.fetchData()
@@ -236,9 +236,9 @@ export default {
                 if (idArr.c.length > 0) {
                     this.$confirm("确认删除", "全部删除", {
                         confirmButtonText: "确认",
-                        cancelButtonText: "取消",
+                        cancelButtonText: "取消"
                     }).then(() => {
-                        requestByDelete(api.orderProduct, JSON.stringify(idArr)).then((value) => {
+                        requestByDelete(api.orderProduct, JSON.stringify(idArr)).then(value => {
                             if (value.code === 2000) {
                                 this.fetchData()
                             }
@@ -282,24 +282,24 @@ export default {
 
             let req = {
                 code: this.dataForm.interdiction,
-                userId: this.dataForm.userId,
+                userId: this.dataForm.userId
             }
 
             console.log(req)
 
             requestByPost(api.band, {}, req)
-                .then((value) => {
+                .then(value => {
                     console.log(value)
                 })
-                .catch((error) => {
+                .catch(error => {
                     msgBox(1000)
                     this.dataLoading = true
                 })
         },
         searchuser() {
             this.fetchData()
-        },
-    },
+        }
+    }
 }
 </script>
 
@@ -307,9 +307,11 @@ export default {
 .el-select .el-input {
     width: 130px;
 }
+
 .input-with-select .el-input-group__prepend {
     background-color: #fff;
 }
+
 .inputStyle {
     width: 200px;
 }
@@ -323,6 +325,7 @@ export default {
     display: flex;
     justify-content: left;
     align-items: center;
+
     &::v-deep .el-form-item__content {
         margin-left: 0 !important;
     }

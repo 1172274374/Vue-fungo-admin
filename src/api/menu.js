@@ -65,22 +65,22 @@ const Menu = [
     //   ],
     // },
 
-    { header: "产品板块", permissionCode: 200 },
-    {
-        title: "产品管理",
-        permissionCode: 201,
-        group: "widgets2",
-        component: "widgets2",
-        icon: "apps",
-        items: [
-            // { name: "客服", title: "客服", component: "kefu", permissionCode: 202 },
-            { name: "用户反馈", title: "用户反馈", component: "feedback", permissionCode: 203 },
-            { name: "商铺", title: "添加商铺", component: "template", permissionCode: 204 },
-            { name: "图片", title: "热力图", component: "pictures", permissionCode: 205 },
-            // { name: "模型", title: "模型", component: "engineering", permissionCode: 206 },
-            // { name: "版本管理", title: "版本管理", component: "Product", permissionCode: 207 },
-        ],
-    },
+    // { header: "产品板块", permissionCode: 200 },
+    // {
+    //     title: "产品管理",
+    //     permissionCode: 201,
+    //     group: "widgets2",
+    //     component: "widgets2",
+    //     icon: "apps",
+    //     items: [
+    //         // { name: "客服", title: "客服", component: "kefu", permissionCode: 202 },
+    //         { name: "用户反馈", title: "用户反馈", component: "feedback", permissionCode: 203 },
+    //         { name: "商铺", title: "添加商铺", component: "template", permissionCode: 204 },
+    //         { name: "图片", title: "热力图", component: "pictures", permissionCode: 205 },
+    //         { name: "模型", title: "模型", component: "engineering", permissionCode: 206 }
+    //         // { name: "版本管理", title: "版本管理", component: "Product", permissionCode: 207 },
+    //     ]
+    // },
 
     { header: "管理员", permissionCode: 300 },
     {
@@ -92,8 +92,22 @@ const Menu = [
         items: [
             { name: "管理员列表", title: "管理员列表", component: "manager", permissionCode: 302 },
             { name: "权限管理", title: "权限管理", component: "permission", permissionCode: 303 },
-            { name: "审核", title: "审核", component: "audit", permissionCode: 304 },
-        ],
+            { name: "审核", title: "审核", component: "audit", permissionCode: 304 }
+        ]
+    },
+
+    { header: "族谱", permissionCode: 400 },
+    {
+        title: "族谱管理",
+        permissionCode: 401,
+        group: "widgets5",
+        component: "widgets5",
+        icon: "edit_square",
+        items: [
+            { name: "支系管理", title: "支系管理", component: "clade", permissionCode: 402 },
+            { name: "房系管理", title: "房系管理", component: "house", permissionCode: 403 },
+            { name: "族谱档案管理", title: "族谱档案管理", component: "archives", permissionCode: 404 }
+        ]
     },
     // {
     //   title: "权限管理",
@@ -110,8 +124,8 @@ const Menu = [
         group: "forms",
         component: "forms",
         icon: "edit",
-        items: [{ name: "basic", title: "General", component: "components/basic-forms" }],
-    },
+        items: [{ name: "basic", title: "General", component: "components/basic-forms" }]
+    }
     // { divider: true },
     // { header: 'Extras' },
     // {
@@ -127,7 +141,7 @@ const Menu = [
     // },
 ]
 // reorder menu
-Menu.forEach((item) => {
+Menu.forEach(item => {
     if (item.items) {
         item.items.sort((x, y) => {
             let textA = x.title.toUpperCase()

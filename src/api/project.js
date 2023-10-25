@@ -1,48 +1,85 @@
 const Projects = [
     {
-        username: "Dessie",
-        avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/ludwiczakpawel/128.jpg",
-        name: "Template PSD",
-        deadline: "2 days later",
-        progress: 90,
-        color: "pink",
+        id: 301,
+        label: "管理员",
+        children: [
+            {
+                id: 302,
+                label: "管理员管理"
+            },
+            {
+                id: 303,
+                label: "权限管理"
+            },
+            {
+                id: 304,
+                label: "审核"
+            }
+        ]
     },
     {
-        username: "Jakayla",
-        avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/suprb/128.jpg",
-        name: "Logo Design",
-        deadline: "1 weeks later",
-        progress: 70,
-        color: "success",
-    },
-    {
-        username: "Ludwiczakpawel",
-        avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/ludwiczakpawel/128.jpg",
-        name: "REST API",
-        deadline: "1 Month later",
-        progress: 50,
-        color: "info",
-    },
-    {
-        username: "Damenleeturks",
-        avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/damenleeturks/128.jpg",
-        name: "API Unit Test",
-        deadline: "2 Month later",
-        progress: 30,
-        color: "teal",
-    },
-    {
-        username: "Caspergrl",
-        avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/caspergrl/128.jpg",
-        name: "Project Deploy",
-        deadline: "half year later",
-        progress: 15,
-        color: "grey",
-    },
+        id: 401,
+        label: "族谱管理",
+        children: [
+            {
+                id: 402,
+                label: "支系管理"
+            },
+            {
+                id: 403,
+                label: "房系管理"
+            },
+            {
+                id: 404,
+                label: "族谱档案管理"
+            }
+        ]
+    }
+    // {
+    //     id: 201,
+    //     label: "产品管理",
+    //     children: [
+    //         {
+    //             id: 202,
+    //             label: "客服"
+    //         },
+    //         {
+    //             id: 203,
+    //             label: "用户反馈"
+    //         },
+    //         {
+    //             id: 204,
+    //             label: "工程模板"
+    //         },
+    //         {
+    //             id: 205,
+    //             label: "热力图"
+    //         },
+    //         {
+    //             id: 206,
+    //             label: "模型"
+    //         },
+    //         {
+    //             id: 207,
+    //             label: "版本管理"
+    //         }
+    //     ]
+    // }
 ]
 
-const getProject = (limit) => {
-    return limit ? Projects.slice(0, limit) : Projects
-}
+const BranchOption = [
+    {
+        value: "启用",
+        label: "启用"
+    },
+    {
+        value: "禁用",
+        label: "禁用"
+    },
+    {
+        value: "全部",
+        label: "全部"
+    }
+]
 
-export { Projects, getProject }
+export { Projects, BranchOption }

@@ -7,13 +7,12 @@ import * as Files from "./file"
 import * as Mail from "./mail"
 import * as Post from "./post"
 import * as Chart from "./chart"
-import * as Project from "./project"
+
 export default {
     // user
     getUser: User.getUser,
     getUserById: User.getUserById,
-    // project
-    getProject: Project.getProject,
+
     // activity
     getActivity: Activity.default.getActivity,
     // post
@@ -33,5 +32,5 @@ export default {
     // chart data
     getMonthVisit: Chart.monthVisitData,
     getCampaign: Chart.campaignData,
-    getLocation: Chart.locationData,
+    getLocation: Chart.locationData
 }
